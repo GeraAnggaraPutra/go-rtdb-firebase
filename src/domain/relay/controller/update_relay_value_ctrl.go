@@ -42,9 +42,9 @@ func (ctrl *RelayController) UpdateRelayValueCtrl() echo.HandlerFunc {
 
 		err = ctrl.service.UpdateRelayValueSvc(c.Request().Context(), relayNumber, req.Value)
 		if err != nil {
-			return module.ResponseError(c, http.StatusInternalServerError, constant.ErrUnknownSource.Error(), "failed update relay value")
+			return module.ResponseError(c, http.StatusInternalServerError, err.Error(), "failed update relay value")
 		}
 
-		return module.ResponseData(c, http.StatusOK, nil, fmt.Sprintf("successfully relay %d updated with value %d", relayNumber, req.Value))
+		return module.ResponseData(c, http.StatusOK, nil, fmt.Sprintf("successfully updated relay %d with value %d", relayNumber, req.Value))
 	}
 }
