@@ -19,12 +19,12 @@ func (s *RelayService) UpdateRelayValueSvc(
 	ref := s.dbClient.NewRef("board1/outputs/digital").Child(strconv.Itoa(relayNumber))
 
 	updateRelayValue := func(tn db.TransactionNode) (interface{}, error) {
-		var relayData RelayData
+		var relayData int
 		if err := tn.Unmarshal(&relayData); err != nil {
 			return nil, err
 		}
 
-		relayData.Value = value
+		relayData = value
 
 		return relayData, nil
 	}
